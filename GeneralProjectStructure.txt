@@ -1,0 +1,26 @@
+PostgreSQL Database
+  Tables as Provided
+Java Tomcat Application Server
+  DAOs:
+    User
+    Reimbursement
+  POJOs:
+    User
+    Reimbursement
+  Services:
+    Check status,
+    Check role
+    return pile
+Angular
+  login
+  user dash
+    Worker:
+      add new request
+      view past requests
+    Finance Manager
+      See all
+      See approved
+      See denied
+      See pending
+        Approve/Deny
+     *Finance Managers can log in and add their own reimbursement requests but not approve them.

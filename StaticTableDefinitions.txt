@@ -1,0 +1,14 @@
+User Roles:
+0 - standard employee
+1 - finance manager
+
+Reimbursement Type:
+0 - Lodging
+1 - Travel
+2 - Food
+3 - Other
+
+Reimbursement Status Ids:
+0 - Under Review
+1 - Approved
+2 - Denied
