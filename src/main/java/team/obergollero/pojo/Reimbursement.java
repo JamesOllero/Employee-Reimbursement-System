@@ -40,4 +40,13 @@ public class Reimbursement {
 	public User getResolver() {return this.resolver;}
 	public String getStatus() {return this.status;}
 	public String getType() {return this.type;}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
+				+ ", description=" + description + ", reciept=" + reciept + ", author=" + author.getFirstName() + " " + author.getLastName() + ", resolver="
+				+ resolver.getFirstName() + " " + resolver.getLastName() + ", status=" + status + ", type=" + type + "]";
+	}
+	
+	
 }
