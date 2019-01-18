@@ -17,7 +17,8 @@ public class ReimbursmentDaoImp implements ReimbursementDao {
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
 		try {
 			c = ConnectionUtil.getConnectionManager().newConnection();
-			String sql =
+			c.setAutoCommit(false);
+			String sql = "";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setInt(1, userId);
 			ResultSet rs = ps.executeQuery();
@@ -25,7 +26,26 @@ public class ReimbursmentDaoImp implements ReimbursementDao {
 				Reimbursement r = new Reimbursement();
 				
 			}
+			c.commit();
+			c.setAutoCommit(true);
+			return reimbursements;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if(c!=null) {
+				try {
+					c.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
+		return reimbursements;
 	}
 
 	public List<Reimbursement> getReimbursementsByType(int type) {
