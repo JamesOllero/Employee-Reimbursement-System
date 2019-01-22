@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { TicketStatusComponentComponent } from './ticket-status-component/ticket-status-component.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [TicketStatusComponentComponent],
   imports: [
     CommonModule
   ]
