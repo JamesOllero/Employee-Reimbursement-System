@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FindUserResetPasswordComponentComponent } from './find-user-reset-password-component/find-user-reset-password-component.component';
+import { FindUserResetPasswordComponentComponent } from './find-user-reset-password-component.component';
 
 @NgModule({
   declarations: [FindUserResetPasswordComponentComponent],
