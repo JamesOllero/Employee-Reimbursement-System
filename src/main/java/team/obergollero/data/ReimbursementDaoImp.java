@@ -18,9 +18,22 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileOutputStream;
 
+/*
+CRUD Operations:
+CREATE: COMPLETE
+READ:
+-By Id: COMPLETE
+-By Type: COMPLETE
+-By Status: COMPLETE
+-All: COMPLETE
+UPDATE: COMPLETE
+DELETE: UNNEEDED (Financial record keeping best practices discourage active deletion of records. Therefore, it is in the
+better interest of the program to have an employee status of "Active" vs. "Inactive".)
+ */
 
 public class ReimbursementDaoImp implements ReimbursementDao {
 
+	//read from id
 	@Override
 	public List<Reimbursement> getReimbursementsByUserId(int userId) {
 		Connection c = null;
@@ -156,6 +169,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		return reimbursements;
 	}
 
+	//read from type
 	@Override
 	public List<Reimbursement> getReimbursementsByType(int type) {
 		Connection c = null;
@@ -291,6 +305,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		return reimbursements;
 	}
 
+	//read from status
 	@Override
 	public List<Reimbursement> getReimbursementsByStatus(int status) {
 		Connection c = null;
@@ -426,77 +441,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		return reimbursements;
 	}
 
-	@Override
-	public void addNewReimbursement(Reimbursement reimbursement) {
-		Connection c = null;
-		FileInputStream fis = null;
-		try {
-			c = ConnectionUtil.getConnectionManager().newConnection();
-			c.setAutoCommit(false);
-			User author = reimbursement.getAuthor();
-			File reciept = null;
-			String sql = "insert into project_1.ers_reimbursement (reimb_amount, reimb_submitted, reimb_description, reimb_reciept_title, reimb_reciept, reimb_author, reimb_status_id, reimb_type_id) values (?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setDouble(1, reimbursement.getAmount());
-			ps.setDate(2, Date.valueOf(reimbursement.getSubmitted()));
-			ps.setString(3, reimbursement.getDescription());
-			if(reimbursement.getReciept()==null) {
-				ps.setString(4, null);
-				ps.setBinaryStream(5, null);
-			} else {
-				ps.setString(4, reimbursement.getFileName());
-				reciept = reimbursement.getReciept();
-				try {
-					fis = new FileInputStream(reciept);
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				}
-				ps.setBinaryStream(5, fis);
-			}
-			ps.setInt(6, author.getId());
-			ps.setInt(7, 0);
-			switch(reimbursement.getType().toLowerCase()) {
-			case "lodging":
-				ps.setInt(8, 0);
-				break;
-			case "travel":
-				ps.setInt(8, 1);
-				break;
-			case "food":
-				ps.setInt(8, 2);
-				break;
-			case "other":
-				ps.setInt(8, 3);
-				break;
-			}
-			ps.executeUpdate();
-			c.commit();
-			c.setAutoCommit(true);
-		} catch(SQLException e) {
-			e.printStackTrace();
-			try {
-				c.rollback();
-			} catch(SQLException e1) {
-				e1.printStackTrace();
-			}
-		} finally {
-			if(c!=null) {
-				try {
-					c.close();
-				} catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			if(fis!=null) {
-				try {
-					fis.close();
-				} catch(IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
+	//read all
 	@Override
 	public List<Reimbursement> getAllReimbursements() {
 		Connection c = null;
@@ -630,25 +575,59 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		return reimbursements;
 	}
 
+	//create
 	@Override
-	public void updateReimbursement(Reimbursement reimbursement, User resolver, int newStatus) {
+	public void addNewReimbursement(Reimbursement reimbursement) {
 		Connection c = null;
+		FileInputStream fis = null;
 		try {
 			c = ConnectionUtil.getConnectionManager().newConnection();
 			c.setAutoCommit(false);
-			String sql = "update project_1.ers_reimbursement set reimb_resolved=?, reimb_resolver=?, reimb_status_id=? where reimb_id=?";
+			User author = reimbursement.getAuthor();
+			File reciept = null;
+			String sql = "insert into project_1.ers_reimbursement " +
+					"(reimb_amount, " +
+					"reimb_submitted, " +
+					"reimb_description, " +
+					"reimb_reciept_title, " +
+					"reimb_reciept, " +
+					"reimb_author, " +
+					"reimb_status_id, " +
+					"reimb_type_id) " +
+					"values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setDate(1, Date.valueOf(reimbursement.getResolved()));
-			ps.setInt(2, resolver.getId());
-			switch(reimbursement.getStatus().toLowerCase()){
-				case "approved":
-					ps.setInt(3,1);
-					break;
-				case "denied":
-					ps.setInt(3,2);
-					break;
+			ps.setDouble(1, reimbursement.getAmount());
+			ps.setDate(2, Date.valueOf(reimbursement.getSubmitted()));
+			ps.setString(3, reimbursement.getDescription());
+			if(reimbursement.getReciept()==null) {
+				ps.setString(4, null);
+				ps.setBinaryStream(5, null);
+			} else {
+				ps.setString(4, reimbursement.getFileName());
+				reciept = reimbursement.getReciept();
+				try {
+					fis = new FileInputStream(reciept);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+				ps.setBinaryStream(5, fis);
 			}
-			ps.setInt(4, reimbursement.getId());
+			ps.setInt(6, author.getId());
+			ps.setInt(7, 0);
+			switch(reimbursement.getType().toLowerCase()) {
+			case "lodging":
+				ps.setInt(8, 0);
+				break;
+			case "travel":
+				ps.setInt(8, 1);
+				break;
+			case "food":
+				ps.setInt(8, 2);
+				break;
+			case "other":
+				ps.setInt(8, 3);
+				break;
+			}
 			ps.executeUpdate();
 			c.commit();
 			c.setAutoCommit(true);
@@ -664,6 +643,112 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 				try {
 					c.close();
 				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch(IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	//update
+	@Override
+	public void updateReimbursement(Reimbursement reimbursement) {
+		Connection c = null;
+		FileInputStream fis = null;
+		try {
+			c = ConnectionUtil.getConnectionManager().newConnection();
+			c.setAutoCommit(false);
+			String sql = "update project_1.ers_reimbursement set " +
+					"reimb_amount=?," +
+					"reimb_submitted=?," +
+					"reimb_resolved=?," +
+					"reimb_description=?," +
+					"reimb_reciept_title=?," +
+					"reimb_reciept=?," +
+					"reimb_author=?," +
+					"reimb_resolver=?," +
+					"reimb_status_id=?," +
+					"reimb_type_id=? " +
+					"where reimb_id=?";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setDouble(1, reimbursement.getAmount());
+			ps.setDate(2, Date.valueOf(reimbursement.getSubmitted()));
+			ps.setDate(3, Date.valueOf(reimbursement.getResolved()));
+			ps.setString(4, reimbursement.getDescription());
+			ps.setString(5, reimbursement.getFileName());
+			if (reimbursement.getReciept() == null) {
+				ps.setBinaryStream(6, null);
+			} else {
+				fis = new FileInputStream(reimbursement.getReciept());
+				ps.setBinaryStream(6, fis);
+			}
+			ps.setInt(7, reimbursement.getAuthor().getId());
+			if(reimbursement.getResolver()==null) {
+				ps.setInt(8, 0);
+			} else {
+				ps.setInt(8, reimbursement.getResolver().getId());
+			}
+			switch(reimbursement.getStatus().toLowerCase()){
+				case "pending":
+					ps.setInt(9, 0);
+					break;
+				case "approved":
+					ps.setInt(9, 1);
+					break;
+				case "denied":
+					ps.setInt(9, 2);
+					break;
+			}
+			switch(reimbursement.getType().toLowerCase()){
+				case "lodging":
+					ps.setInt(10, 0);
+					break;
+				case "travel":
+					ps.setInt(10, 1);
+					break;
+				case "food":
+					ps.setInt(10, 2);
+					break;
+				case "other":
+					ps.setInt(10, 3);
+					break;
+			}
+			ps.setInt(11, reimbursement.getId());
+			ps.executeUpdate();
+			c.commit();
+			c.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if(c!=null) {
+				try {
+					c.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(fis!=null) {
+				try {
+					fis.close();
+				} catch(IOException e) {
 					e.printStackTrace();
 				}
 			}

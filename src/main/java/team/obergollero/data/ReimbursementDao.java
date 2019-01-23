@@ -11,5 +11,5 @@ public interface ReimbursementDao {
 	List<Reimbursement> getReimbursementsByStatus(int status);
 	void addNewReimbursement(Reimbursement reimbursemnt);
 	List<Reimbursement> getAllReimbursements();
-	void updateReimbursement(Reimbursement reimbursement, User resolver, int newStatus);
+	void updateReimbursement(Reimbursement reimbursement);
 }
