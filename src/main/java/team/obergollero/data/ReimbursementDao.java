@@ -1,6 +1,8 @@
 package team.obergollero.data;
 
 import team.obergollero.pojo.Reimbursement;
+import team.obergollero.pojo.User;
+
 import java.util.List;
 
 public interface ReimbursementDao {
@@ -9,4 +11,5 @@ public interface ReimbursementDao {
 	List<Reimbursement> getReimbursementsByStatus(int status);
 	void addNewReimbursement(Reimbursement reimbursemnt);
 	List<Reimbursement> getAllReimbursements();
+	void updateReimbursement(Reimbursement reimbursement, User resolver, int newStatus);
 }

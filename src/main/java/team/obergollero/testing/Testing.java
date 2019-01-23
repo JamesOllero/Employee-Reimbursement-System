@@ -2,6 +2,8 @@ package team.obergollero.testing;
 
 import java.sql.SQLException;
 
+import team.obergollero.data.UserDao;
+import team.obergollero.data.UserDaoImp;
 import team.obergollero.util.ConnectionUtil;
 import team.obergollero.pojo.Reimbursement;
 import team.obergollero.pojo.User;
@@ -22,8 +24,12 @@ public class Testing {
 			for(Reimbursement r : reimbursements2) {
 				System.out.println(r);
 			}
+            UserDao userDao = new UserDaoImp();
+			User oberg = userDao.getUserByEmail("oberg.chris@yahoo.com");
+			System.out.println(oberg);
+			User duet = userDao.getUserByUsername("aduet");
+			System.out.println(duet);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

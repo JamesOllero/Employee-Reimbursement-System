@@ -2,6 +2,8 @@ package team.obergollero.data;
 
 import java.util.List;
 import java.util.ArrayList;
+
+import org.postgresql.core.SqlCommand;
 import team.obergollero.pojo.Reimbursement;
 import team.obergollero.pojo.User;
 import team.obergollero.util.ConnectionUtil;
@@ -19,6 +21,7 @@ import java.io.FileOutputStream;
 
 public class ReimbursementDaoImp implements ReimbursementDao {
 
+	@Override
 	public List<Reimbursement> getReimbursementsByUserId(int userId) {
 		Connection c = null;
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
@@ -102,7 +105,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 				a.setRole(rs.getString("author_role_type"));
 				r.setAuthor(a);
 				if(rs.getInt("resolver_id")==0) {
-					r.setResolver(null);
+					r.setResolver(re);
 				} else {
 					re.setId(rs.getInt("resolver_id"));
 					re.setUsername(rs.getString("resolver_username"));
@@ -153,6 +156,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		return reimbursements;
 	}
 
+	@Override
 	public List<Reimbursement> getReimbursementsByType(int type) {
 		Connection c = null;
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
@@ -236,7 +240,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 				a.setRole(rs.getString("author_role_type"));
 				r.setAuthor(a);
 				if(rs.getInt("resolver_id")==0) {
-					r.setResolver(null);
+					r.setResolver(re);
 				} else {
 					re.setId(rs.getInt("resolver_id"));
 					re.setUsername(rs.getString("resolver_username"));
@@ -287,6 +291,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		return reimbursements;
 	}
 
+	@Override
 	public List<Reimbursement> getReimbursementsByStatus(int status) {
 		Connection c = null;
 		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
@@ -370,7 +375,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 				a.setRole(rs.getString("author_role_type"));
 				r.setAuthor(a);
 				if(rs.getInt("resolver_id")==0) {
-					r.setResolver(null);
+					r.setResolver(re);
 				} else {
 					re.setId(rs.getInt("resolver_id"));
 					re.setUsername(rs.getString("resolver_username"));
@@ -420,7 +425,8 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 		}
 		return reimbursements;
 	}
-	
+
+	@Override
 	public void addNewReimbursement(Reimbursement reimbursement) {
 		Connection c = null;
 		FileInputStream fis = null;
@@ -429,7 +435,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 			c.setAutoCommit(false);
 			User author = reimbursement.getAuthor();
 			File reciept = null;
-			String sql = "insert into project_0.ers_reimbursement (reimb_amount, reimb_submitted, reimb_description, reimb_reciept_title, reimb_reciept, reimb_author, reimb_status_id, reimb_type_id) values (?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into project_1.ers_reimbursement (reimb_amount, reimb_submitted, reimb_description, reimb_reciept_title, reimb_reciept, reimb_author, reimb_status_id, reimb_type_id) values (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = c.prepareStatement(sql);
 			ps.setDouble(1, reimbursement.getAmount());
 			ps.setDate(2, Date.valueOf(reimbursement.getSubmitted()));
@@ -573,7 +579,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 				a.setRole(rs.getString("author_role_type"));
 				r.setAuthor(a);
 				if(rs.getInt("resolver_id")==0) {
-					r.setResolver(null);
+					r.setResolver(re);
 				} else {
 					re.setId(rs.getInt("resolver_id"));
 					re.setUsername(rs.getString("resolver_username"));
@@ -622,5 +628,45 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 			}
 		}
 		return reimbursements;
+	}
+
+	@Override
+	public void updateReimbursement(Reimbursement reimbursement, User resolver, int newStatus) {
+		Connection c = null;
+		try {
+			c = ConnectionUtil.getConnectionManager().newConnection();
+			c.setAutoCommit(false);
+			String sql = "update project_1.ers_reimbursement set reimb_resolved=?, reimb_resolver=?, reimb_status_id=? where reimb_id=?";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ps.setDate(1, Date.valueOf(reimbursement.getResolved()));
+			ps.setInt(2, resolver.getId());
+			switch(reimbursement.getStatus().toLowerCase()){
+				case "approved":
+					ps.setInt(3,1);
+					break;
+				case "denied":
+					ps.setInt(3,2);
+					break;
+			}
+			ps.setInt(4, reimbursement.getId());
+			ps.executeUpdate();
+			c.commit();
+			c.setAutoCommit(true);
+		} catch(SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if(c!=null) {
+				try {
+					c.close();
+				} catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
