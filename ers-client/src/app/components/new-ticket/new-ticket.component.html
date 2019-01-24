@@ -1,3 +1,17 @@
-<p>
-  new-ticket works!
-</p>
+<div class="container">
+  <label for="ticket"><b>Expense Description</b></label>
+  <input type="text" placeholder="Describe the expenses you wish to have reimbursed here" name="ticket" required>
+  
+  <label for="amt"><b>Amount</b></label>
+  <input type="text" placeholder="$" name="amt" required>
+
+
+  <label for="date"><b>date of billing</b></label>
+  <input type="date" name="date" required>
+
+  <label for="receipt"><b>upload receipt data</b></label>
+  <input type = "file" name = "receipt" required>
+
+  <button type="submit">Submit Ticket</button>
+  <button type="reset">Cancel</button>
+</div>

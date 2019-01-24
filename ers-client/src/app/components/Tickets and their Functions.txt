@@ -1,0 +1,11 @@
+find user reset password
+-User Inputs Email
+
+reset password
+-User inputs new password
+-Database updates with this new password
+
+Login
+-User inputs username/email and password
+-If 
+-User alternatively can move to Reset Password/Register
