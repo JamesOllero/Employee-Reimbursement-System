@@ -31,3 +31,9 @@ on project_1.ers_reimbursement.reimb_author=author.ers_users_id
 left join project_1.ers_users as resolver
 on project_1.ers_reimbursement.reimb_resolver=resolver.ers_users_id
 left join 
+
+
+
+
+
+select ers_users_id as id,ers_username as username,ers_password as password,user_first_name as firstname,user_last_name as lastname,user_email as email,project_1.ers_user_roles.user_role as userrole,project_1.ers_user_status.user_status as activestatus from project_1.ers_usersleft join project_1.ers_user_roles on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id left join project_1.ers_user_status on project_1.ers_users.user_status_id=project_1.ers_user_status.user_status_id where user_email = ?
