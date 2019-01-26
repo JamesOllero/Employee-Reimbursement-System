@@ -1,15 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
+
+// -Welcomes User
+// -Allows User to access different pages based on status(Employee/Admin)
+// -Logout
 
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css']
 })
-export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+export class MainMenuComponent implements OnInit {
+  userNavs: Array<{title: string}>;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
+      if (this.authService.hasRoles(['Manager'])) {
+          this.userNavs = environment.managerNav;
+      } else {
+          this.userNavs = environment.employeeNav;
+      }
   }
-
 }
+

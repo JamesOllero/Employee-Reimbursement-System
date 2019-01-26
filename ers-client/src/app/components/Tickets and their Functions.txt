@@ -1,0 +1,36 @@
+find user reset password
+-User Inputs Email
+-If Email found: Move to reset password
+
+reset password
+-User inputs new password
+-Database updates with this new password
+
+Login
+-User inputs username/email and password
+-If successful, moves to Main Menu
+-User alternatively can move to Reset Password/Register
+
+Main Menu
+-Welcomes User
+-Allows User to access different pages based on status(Employee/Admin)
+-Logout
+
+Ticket-Status
+-Displays a table of all user's tickets
+-Pulls ALL user's tickets from database
+-Logout
+
+Update-Ticket
+-Admin-Exclusive
+-Pulls all Unchecked Tickets from database not submitted by user
+-Allows Admin to approve/deny tickets
+-Requires an amount to reimburse employee if approved
+-Logout
+
+Submit-Ticket
+-Presents the last five tickets from Database
+-Prompts the user to describe the expense, mark its date, its cost, and provide a receipt file
+-Adds ticket to Database if valid
+-Allows the user to cancel and return to menu without submitting
+-Lets the user logout

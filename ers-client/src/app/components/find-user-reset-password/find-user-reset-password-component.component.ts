@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+// -User Inputs Email
+// -If Email found: Move to reset password
 
 @Component({
   selector: 'app-find-user-reset-password-component',
