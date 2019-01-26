@@ -4,4 +4,41 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>team.obergollero.web.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/auth/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <servlet-class>team.obergollero.web.ReimbursementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <url-pattern>/ticket</url-pattern>
+  </servlet-mapping>
+  <listener>
+    <listener-class>team.obergollero.web.ContextListener</listener-class>
+  </listener>
+  
+  
+  <context-param>
+    <param-name>url</param-name>
+    <param-value>jdbc:postgresql://coberg-trainingdb.cyeu8paosfnf.us-east-2.rds.amazonaws.com:5432/inClass</param-value>
+  </context-param>
+  <context-param>
+    <param-name>username</param-name>
+    <param-value>csoberg</param-value>
+  </context-param>
+  <context-param>
+    <param-name>password</param-name>
+    <param-value>passblurb95$</param-value>
+  </context-param>
+  <context-param>
+    <param-name>driver</param-name>
+    <param-value>org.postgresql.Driver</param-value>
+  </context-param>
 </web-app>
