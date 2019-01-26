@@ -1,3 +1,31 @@
-<p>
-  update-ticket works!
-</p>
+<div class="container">
+  <table>
+    <tr>
+      <th>Ticket Number</th>
+      <th>Submitted By</th>
+      <th>Date of submission</th>
+      <th>Type</th>
+      <th>Cost</th>
+      <th>Description</th>
+      <th>Approve/Deny</th>
+      <th></th>
+    </tr>
+  <tr>
+    <td>1</td>
+    <td>James O</td>
+    <td>Lodging</td>
+    <td>01/25/19</td>
+    <td>$110</td>
+    <td>Rent for IQ Apartments</td>
+    <td><input type="radio" name="Approve/Deny" value="Approve">Approve<br>
+      <input type="radio" name="Approve/Deny" value="Deny">Deny<br></td>
+      
+      <td><button type="submit" [disabled]="Approve/Deny == null">Update</button></td>
+  </tr>
+    
+  </table>
+
+<button type="submit">Back to Main Menu</button>
+<button type="submit">Logout</button>
+    
+  </div>
