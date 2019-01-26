@@ -10,21 +10,18 @@ export const environment = {
       title: 'Reimbursements'
     },
     {
-      title: 'Employees'
+      title: 'Ticket Status'
     },
     {
-      title: 'New Employee'
+      title: 'New Reimbursement'
     }
   ],
   employeeNav: [
     {
-      title: 'Reimbursements'
+      title: 'Ticket Status'
     },
     {
       title: 'New Reimbursement'
-    },
-    {
-      title: 'Profile'
     }
   ]
 };
