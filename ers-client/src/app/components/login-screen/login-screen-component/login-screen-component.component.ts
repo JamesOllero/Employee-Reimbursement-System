@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
+// -User inputs username/email and password
+// -If successful, moves to Main Menu
+// -User alternatively can move to Reset Password/Register
+
+
 @Component({
   selector: 'app-login-screen-component',
   templateUrl: './login-screen-component.component.html',

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 
+// -Welcomes User
+// -Allows User to access different pages based on status(Employee/Admin)
+// -Logout
+
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
