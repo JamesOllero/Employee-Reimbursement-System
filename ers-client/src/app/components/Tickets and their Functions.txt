@@ -18,16 +18,19 @@ Main Menu
 
 Ticket-Status
 -Displays a table of all user's tickets
+-Pulls ALL user's tickets from database
 -Logout
 
 Update-Ticket
 -Admin-Exclusive
+-Pulls all Unchecked Tickets from database not submitted by user
 -Allows Admin to approve/deny tickets
 -Requires an amount to reimburse employee if approved
 -Logout
 
 Submit-Ticket
--Presents the last five tickets
+-Presents the last five tickets from Database
 -Prompts the user to describe the expense, mark its date, its cost, and provide a receipt file
+-Adds ticket to Database if valid
 -Allows the user to cancel and return to menu without submitting
 -Lets the user logout
