@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ticket } from '../ticket-status/ticket-status-component.component';
+import { Ticket } from '../../../app/model/ticket';
+import { User } from '../../../app/model/user';
 
 @Component({
   selector: 'app-new-ticket',
@@ -14,7 +15,7 @@ export class NewTicketComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {//What does this need to do on init?  Remember who this user is?
   }
 
 }

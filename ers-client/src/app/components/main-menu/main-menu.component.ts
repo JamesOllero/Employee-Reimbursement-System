@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Ticket } from '../ticket-status/ticket-status-component.component';
-import { User } from '../login-screen/login-screen-component/login-screen-component.component'
+import { Ticket } from '../../../app/model/ticket';
+import { User } from '../../../app/model/user';
+import { TicketService } from 'src/app/services/ticket.service';
 
 // -Welcomes User
 // -Allows User to access different pages based on status(Employee/Admin)
@@ -17,6 +18,9 @@ import { User } from '../login-screen/login-screen-component/login-screen-compon
 
 export class MainMenuComponent implements OnInit {
   userNavs: Array<{title: string}>;
+  tickets: Array<{ticket}> = [];
+  temp: Ticket = new Ticket(0, null, '', '', 0, '', '', '');
+  ticketService: TicketService;
 
   constructor(
     private authService: AuthService,
