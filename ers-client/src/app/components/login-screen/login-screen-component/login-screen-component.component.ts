@@ -17,7 +17,6 @@ export class LoginScreenComponent implements OnInit {
 
   username: string;
   password: string;
-
   returnUrl: string;
 
   constructor(

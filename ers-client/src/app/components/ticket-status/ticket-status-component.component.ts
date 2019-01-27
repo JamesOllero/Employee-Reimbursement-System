@@ -17,3 +17,7 @@ export class TicketStatusComponentComponent implements OnInit {
   }
 
 }
+// Services in typescript are blocks of reusable code set up to call to a servlet
+// Set up an HTTP request
+
+//subscribe is there to take what the java side takes back

@@ -23,9 +23,6 @@
     <servlet-name>ReimbursementServlet</servlet-name>
     <url-pattern>/ticket</url-pattern>
   </servlet-mapping>
-  <listener>
-    <listener-class>team.obergollero.web.ContextListener</listener-class>
-  </listener>
   
   
   <context-param>
