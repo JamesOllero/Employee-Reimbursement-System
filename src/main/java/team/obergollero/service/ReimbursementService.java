@@ -20,4 +20,16 @@ public class ReimbursementService {
     public List<Reimbursement> getAllReimbursements() {
         return this.reimbursementDao.getAllReimbursements();
     }
+
+    public void addNewReimbursement(Reimbursement r) {
+        this.reimbursementDao.addNewReimbursement(r);
+    }
+
+    public int getLatestId() {
+        return this.reimbursementDao.getLatestId();
+    }
+
+    public void updateReimbursement(Reimbursement r) {
+        this.reimbursementDao.updateReimbursement(r);
+    }
 }

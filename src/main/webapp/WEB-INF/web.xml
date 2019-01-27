@@ -4,6 +4,9 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  <listener>
+    <listener-class>team.obergollero.web.ContextListener</listener-class>
+  </listener>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>team.obergollero.web.LoginServlet</servlet-class>

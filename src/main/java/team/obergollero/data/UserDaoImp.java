@@ -21,60 +21,62 @@ method.)
 public class UserDaoImp implements UserDao {
 
     //read by username
+    @Deprecated
 	public User getUserByUsername(String username) {
-		Connection c = null;
-		User u = null;
-		try{
-		    c = ConnectionUtil.getConnectionManager().newConnection();
-		    c.setAutoCommit(false);
-		    String sql = "select ers_users_id as id, " +
-                    "ers_username as username, " +
-                    "ers_password as password, " +
-                    "user_first_name as firstname, " +
-                    "user_last_name as lastname, " +
-                    "user_email as email, " +
-                    "project_1.ers_user_roles.user_role as userrole, " +
-                    "project_1.ers_user_status.user_status as activestatus " +
-                    "from project_1.ers_users " +
-                    "left join project_1.ers_user_roles " +
-                    "on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id " +
-                    "left join project_1.ers_user_status " +
-                    "on project_1.ers_users.user_status_id=project_1.ers_user_status.user_status_id " +
-                    "where ers_username = ?";;
-            PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, username);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                u = new User();
-                u.setId(rs.getInt("id"));
-                u.setUsername(rs.getString("username"));
-                u.setPassword(rs.getString("password"));
-                u.setFirstName(rs.getString("firstname"));
-                u.setLastName(rs.getString("lastname"));
-                u.setEmail(rs.getString("email"));
-                u.setRole(rs.getString("userrole"));
-                u.setActive(rs.getString("activestatus"));
-            }
-            c.commit();
-            c.setAutoCommit(true);
-            return u;
-        } catch(SQLException e){
-		    e.printStackTrace();
-		    try{
-		        c.rollback();
-            } catch(SQLException e1){
-		        e1.printStackTrace();
-            }
-        } finally {
-		    if(c!=null){
-		        try{
-		            c.close();
-                } catch(SQLException e){
-		            e.printStackTrace();
-                }
-            }
-        }
-		return u;
+//		Connection c = null;
+//		User u = null;
+//		try{
+//		    c = ConnectionUtil.getConnectionManager().newConnection();
+//		    c.setAutoCommit(false);
+//		    String sql = "select ers_users_id as id, " +
+//                    "ers_username as username, " +
+//                    "ers_password as password, " +
+//                    "user_first_name as firstname, " +
+//                    "user_last_name as lastname, " +
+//                    "user_email as email, " +
+//                    "project_1.ers_user_roles.user_role as userrole, " +
+//                    "project_1.ers_user_status.user_status as activestatus " +
+//                    "from project_1.ers_users " +
+//                    "left join project_1.ers_user_roles " +
+//                    "on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id " +
+//                    "left join project_1.ers_user_status " +
+//                    "on project_1.ers_users.user_status_id=project_1.ers_user_status.user_status_id " +
+//                    "where ers_username = ?";;
+//            PreparedStatement ps = c.prepareStatement(sql);
+//            ps.setString(1, username);
+//            ResultSet rs = ps.executeQuery();
+//            while(rs.next()){
+//                u = new User();
+//                u.setId(rs.getInt("id"));
+//                u.setUsername(rs.getString("username"));
+//                u.setPassword(rs.getString("password"));
+//                u.setFirstName(rs.getString("firstname"));
+//                u.setLastName(rs.getString("lastname"));
+//                u.setEmail(rs.getString("email"));
+//                u.setRole(rs.getString("userrole"));
+//                u.setActive(rs.getString("activestatus"));
+//            }
+//            c.commit();
+//            c.setAutoCommit(true);
+//            return u;
+//        } catch(SQLException e){
+//		    e.printStackTrace();
+//		    try{
+//		        c.rollback();
+//            } catch(SQLException e1){
+//		        e1.printStackTrace();
+//            }
+//        } finally {
+//		    if(c!=null){
+//		        try{
+//		            c.close();
+//                } catch(SQLException e){
+//		            e.printStackTrace();
+//                }
+//            }
+//        }
+//		return u;
+        return null;
 	}
 
 	//read by email
