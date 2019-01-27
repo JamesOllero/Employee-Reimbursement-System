@@ -16,6 +16,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class LoginScreenComponent implements OnInit {
 
   username: string;
+  email: string;
   password: string;
   returnUrl: string;
 
@@ -35,4 +36,10 @@ export class LoginScreenComponent implements OnInit {
       console.log(err);
     });
   }
+}
+
+export class User{
+firstName: String;
+lastName: String;
+userID: number;
 }

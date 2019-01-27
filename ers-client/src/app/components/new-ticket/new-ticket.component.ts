@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Ticket } from '../ticket-status/ticket-status-component.component';
 
 @Component({
   selector: 'app-new-ticket',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewTicketComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
   }

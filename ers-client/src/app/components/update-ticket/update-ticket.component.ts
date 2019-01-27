@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Ticket } from '../ticket-status/ticket-status-component.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // -Admin-Exclusive
 // -Pulls all Unchecked Tickets from database not submitted by user
@@ -13,9 +15,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateTicketComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit() {//todo: pull the table 
   }
 
 }
