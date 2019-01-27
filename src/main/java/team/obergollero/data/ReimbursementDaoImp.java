@@ -156,6 +156,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 
 	//read from type
 	@Override
+	@Deprecated
 	public List<Reimbursement> getReimbursementsByType(int type) {
 //		Connection c = null;
 //		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
@@ -293,6 +294,7 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 
 	//read from status
 	@Override
+	@Deprecated
 	public List<Reimbursement> getReimbursementsByStatus(int status) {
 //		Connection c = null;
 //		List<Reimbursement> reimbursements = new ArrayList<Reimbursement>();
@@ -719,5 +721,40 @@ public class ReimbursementDaoImp implements ReimbursementDao {
 				}
 			}
 		}
+	}
+
+	@Override
+	public int getLatestId() {
+		int id = 0;
+		Connection c = null;
+		try {
+			c = ConnectionUtil.getConnectionManager().newConnection();
+			c.setAutoCommit(false);
+			String sql = "select reimb_id from project_1.ers_reimbursement order by reimb_id desc limit 1";
+			PreparedStatement ps = c.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				id = rs.getInt("reimb_id");
+			}
+			c.commit();
+			c.setAutoCommit(true);
+			return id;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			try {
+				c.rollback();
+			} catch(SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			if(c!=null) {
+				try {
+					c.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return id;
 	}
 }
