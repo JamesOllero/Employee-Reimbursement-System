@@ -1,6 +1,6 @@
 export class User{
-    firstName: String;
-    lastName: String;
-    userID: number;
-    userRole: String;
+   constructor( firstName: String,
+    lastName: String,
+    userID: number,
+    userRole: String){}
     }

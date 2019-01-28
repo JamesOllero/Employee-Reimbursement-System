@@ -20,6 +20,7 @@ export class LoginScreenComponent implements OnInit {
   email: string;
   password: string;
   returnUrl: string;
+  temp: User = new User('', '', 0, '');
 
   constructor(
     private authService: AuthService,

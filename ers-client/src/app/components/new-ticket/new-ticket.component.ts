@@ -9,7 +9,7 @@ import { User } from '../../../app/model/user';
   styleUrls: ['./new-ticket.component.css']
 })
 export class NewTicketComponent implements OnInit {
-
+  UID: User= new User('', '', 0, '');
   constructor(
     private router: Router,
     private route: ActivatedRoute
