@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Ticket } from '../../../app/model/ticket';
+import { Router, ActivatedRoute } from '@angular/router';
+import { TicketService } from 'src/app/services/ticket.service';
+import { User } from '../../../app/model/user';
 
 // -Admin-Exclusive
 // -Pulls all Unchecked Tickets from database not submitted by user
@@ -12,10 +16,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./update-ticket.component.css']
 })
 export class UpdateTicketComponent implements OnInit {
+tickets: Array<Ticket> = [];
+temp: Ticket = new Ticket(0, null, '', '', 0, '', '', '');
+ticketService: TicketService;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit() {//todo: pull the table 
+
   }
 
 }
