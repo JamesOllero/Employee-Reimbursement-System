@@ -32,4 +32,6 @@ public class ReimbursementService {
     public void updateReimbursement(Reimbursement r) {
         this.reimbursementDao.updateReimbursement(r);
     }
+
+    public List<Reimbursement> getFiveReimbursements(int userId) {return this.reimbursementDao.getFiveReimbursements(userId);}
 }
