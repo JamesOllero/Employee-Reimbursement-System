@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ticket } from '../../../app/model/ticket';
 import { TicketService } from 'src/app/services/ticket.service';
 import { User } from '../../../app/model/user';
+import { HttpClient } from '@angular/common/http';
 
 // -Displays a table of all user's tickets
 // -Pulls ALL user's tickets from database
@@ -25,14 +26,15 @@ import { User } from '../../../app/model/user';
 export class TicketStatusComponentComponent implements OnInit {
   tickets: Array<{ticket}> = [];
   temp: Ticket = new Ticket(0, null, '', '', 0, '', '', '');
-  ticketService: TicketService;
 
   constructor(
-
+    ticketService: TicketService,
+    private http: HttpClient,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    
   }
 
 }
