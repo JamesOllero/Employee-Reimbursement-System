@@ -9,3 +9,5 @@ export class Ticket {
     updater: string,
     approveDeny: string){}
   }
+
+  

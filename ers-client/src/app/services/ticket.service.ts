@@ -11,11 +11,11 @@ export class TicketService {
   constructor(private http: HttpClient) { }
 
   getPendingTickets(): Observable<Array<Ticket>>{
-    return this.http.get<Array<Ticket>>('');
+    return this.http.get<Array<Ticket>>('http://localhost:8080/ticket');
   }
 
   getTicketsById(Id: Number): Observable<Array<Ticket>>{
-    return this.http.get<Array<Ticket>>('');
+    return this.http.get<Array<Ticket>>('http://localhost:8080/ticket${$id}');
   }
 
   

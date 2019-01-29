@@ -20,3 +20,7 @@ import { UpdateTicketComponent } from './components/update-ticket/update-ticket.
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+//What I need:
+//Import Router + Routes from x
+//import forRoot
