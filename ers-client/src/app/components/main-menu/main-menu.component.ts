@@ -28,11 +28,7 @@ export class MainMenuComponent implements OnInit {
     private route: ActivatedRoute) {}
 
   ngOnInit() {
-      if (this.authService.hasRoles(['Manager'])) {
-          this.userNavs = environment.managerNav;
-      } else {
-          this.userNavs = environment.employeeNav;
-      }
+
   }
 }
 

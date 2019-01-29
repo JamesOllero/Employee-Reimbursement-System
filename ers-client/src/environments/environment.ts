@@ -3,27 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  apiUrl: "http://localhost:3000",
-  managerNav: [
-    {
-      title: 'Reimbursements'
-    },
-    {
-      title: 'Ticket Status'
-    },
-    {
-      title: 'New Reimbursement'
-    }
-  ],
-  employeeNav: [
-    {
-      title: 'Ticket Status'
-    },
-    {
-      title: 'New Reimbursement'
-    }
-  ]
+  production: false
 };
 
 /*
