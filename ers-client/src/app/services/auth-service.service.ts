@@ -5,7 +5,7 @@ import { HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class AuthServiceService {
-  private authUrl = 'http://localhost:8080/auth';
+  private authUrl = 'http://localhost:8080/login/auth';
 
   constructor(private http: HttpClient) { }
 
@@ -14,7 +14,7 @@ export class AuthServiceService {
   }
 
   hasRoles(roles: Array<string>): boolean {
-    const tokenRoles: Array<string> = JSON.parse(localStorage.getItem('authToken')).roles;
+    const tokenRoles: Array<string> = JSON.parse(localStorage.getItem('authToken')).role;
     return roles.every(role => tokenRoles.indexOf(role) >= 0);
   }
 

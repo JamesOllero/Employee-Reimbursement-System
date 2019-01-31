@@ -95,7 +95,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n"
+module.exports = "<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -207,7 +207,7 @@ module.exports = ".form-container {\r\n  margin: 0 auto;\r\n  width: 100%;\r\n  
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-container\">\n  <form #loginForm=\"ngForm\" novalidate (ngSubmit)=\"loginSubmit()\">\n    <div>\n      <input\n        type=\"text\"\n        name=\"username\"\n        placeholder=\"email\"\n        [(ngModel)]=\"username\"\n        required/>\n    </div>\n    <div>\n      <input\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"password\"\n        [(ngModel)]=\"password\"\n        required/>\n    </div>\n    <div>\n      <button type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n    </div>\n  </form>\n</div>\n"
+module.exports = "<div class=\"form-container\">\r\n  <form #loginForm=\"ngForm\" novalidate (ngSubmit)=\"loginSubmit()\">\r\n    <div>\r\n      <input\r\n        type=\"text\"\r\n        name=\"username\"\r\n        placeholder=\"email\"\r\n        [(ngModel)]=\"username\"\r\n        required/>\r\n    </div>\r\n    <div>\r\n      <input\r\n        type=\"password\"\r\n        name=\"password\"\r\n        placeholder=\"password\"\r\n        [(ngModel)]=\"password\"\r\n        required/>\r\n    </div>\r\n    <div>\r\n      <button type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\r\n    </div>\r\n  </form>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -279,7 +279,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-navigation [navItems]=\"userNavs\"></app-navigation>\n"
+module.exports = "<app-navigation [navItems]=\"userNavs\"></app-navigation>\r\n"
 
 /***/ }),
 
@@ -346,7 +346,7 @@ module.exports = "ul {\r\n  list-style: none;\r\n  border-bottom: 1px solid #bbb
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-container\">\n  <form #loginForm=\"ngForm\" novalidate (ngSubmit)=\"loginSubmit()\">\n    <div>\n      <input\n        type=\"text\"\n        name=\"username\"\n        placeholder=\"email\"\n        [(ngModel)]=\"username\"\n        required/>\n    </div>\n    <div>\n      <input\n        type=\"password\"\n        name=\"password\"\n        placeholder=\"password\"\n        [(ngModel)]=\"password\"\n        required/>\n    </div>\n    <div>\n      <button type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n    </div>\n  </form>\n</div>\n"
+module.exports = "<nav>\r\n  <ul>\r\n    <li *ngFor=\"let item of navItems\">{{item.title}}</li>\r\n  </ul>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -447,13 +447,13 @@ __webpack_require__.r(__webpack_exports__);
 var AuthServiceService = /** @class */ (function () {
     function AuthServiceService(http) {
         this.http = http;
-        this.authUrl = 'http://localhost:8080/auth';
+        this.authUrl = 'http://localhost:8080/login/auth';
     }
     AuthServiceService.prototype.isLoggedIn = function () {
         return localStorage.getItem('authToken') !== null;
     };
     AuthServiceService.prototype.hasRoles = function (roles) {
-        var tokenRoles = JSON.parse(localStorage.getItem('authToken')).roles;
+        var tokenRoles = JSON.parse(localStorage.getItem('authToken')).role;
         return roles.every(function (role) { return tokenRoles.indexOf(role) >= 0; });
     };
     AuthServiceService.prototype.authenticate = function (username, password, success, fail) {
@@ -567,7 +567,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Coding\project_1\ers-client\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Programming\project_1\ers-client\src\main.ts */"./src/main.ts");
 
 
 /***/ })
