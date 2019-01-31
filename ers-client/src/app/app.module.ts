@@ -6,16 +6,20 @@ import { LoginComponent } from './login/login.component';
 import { AppRouterModule } from './app-router.module';
 import { FormsModule } from "@angular/forms";
 import { MainMenuComponent } from './main-menu/main-menu.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
-    AppRouterModule
+    AppRouterModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

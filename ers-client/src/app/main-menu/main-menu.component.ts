@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService} from "../services/auth-service.service";
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: 'app-main-menu',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent implements OnInit {
+  userNavs: Array<{title: string}>;
 
-  constructor() { }
+  constructor(private authService: AuthServiceService) { }
 
   ngOnInit() {
+    if(this.authService.hasRoles(['Manager'])) {
+      this.userNavs = environment.managerNav;
+    } else {
+      this.userNavs = environment.employeeNav;
+    }
   }
 
 }
