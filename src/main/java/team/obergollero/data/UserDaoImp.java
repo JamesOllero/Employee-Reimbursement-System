@@ -35,7 +35,6 @@ public class UserDaoImp implements UserDao {
 //                    "user_last_name as lastname, " +
 //                    "user_email as email, " +
 //                    "project_1.ers_user_roles.user_role as userrole, " +
-//                    "project_1.ers_user_status.user_status as activestatus " +
 //                    "from project_1.ers_users " +
 //                    "left join project_1.ers_user_roles " +
 //                    "on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id " +
@@ -89,11 +88,10 @@ public class UserDaoImp implements UserDao {
                     "user_first_name as firstname, " +
                     "user_last_name as lastname, " +
                     "user_email as email, " +
-                    "project_1.ers_user_roles.user_role as userrole, " +
-                    "project_1.ers_user_status.user_status as activestatus " +
+                    "project_1.ers_user_roles.user_role as userrole " +
                     "from project_1.ers_users " +
                     "left join project_1.ers_user_roles " +
-                    "on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id " +
+                    "on ers_users.user_role_id=ers_user_roles.ers_user_role_id " +
                     "where user_email = ?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, email);
