@@ -39,8 +39,6 @@ public class UserDaoImp implements UserDao {
 //                    "from project_1.ers_users " +
 //                    "left join project_1.ers_user_roles " +
 //                    "on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id " +
-//                    "left join project_1.ers_user_status " +
-//                    "on project_1.ers_users.user_status_id=project_1.ers_user_status.user_status_id " +
 //                    "where ers_username = ?";;
 //            PreparedStatement ps = c.prepareStatement(sql);
 //            ps.setString(1, username);
@@ -54,7 +52,6 @@ public class UserDaoImp implements UserDao {
 //                u.setLastName(rs.getString("lastname"));
 //                u.setEmail(rs.getString("email"));
 //                u.setRole(rs.getString("userrole"));
-//                u.setActive(rs.getString("activestatus"));
 //            }
 //            c.commit();
 //            c.setAutoCommit(true);
@@ -97,8 +94,6 @@ public class UserDaoImp implements UserDao {
                     "from project_1.ers_users " +
                     "left join project_1.ers_user_roles " +
                     "on project_1.ers_users.user_role_id=project_1.ers_user_roles.ers_user_role_id " +
-                    "left join project_1.ers_user_status " +
-                    "on project_1.ers_users.user_status_id=project_1.ers_user_status.user_status_id " +
                     "where user_email = ?";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, email);
@@ -112,7 +107,6 @@ public class UserDaoImp implements UserDao {
                 u.setLastName(rs.getString("lastname"));
                 u.setEmail(rs.getString("email"));
                 u.setRole(rs.getString("userrole"));
-                u.setActive(rs.getString("activestatus"));
             }
             c.commit();
             c.setAutoCommit(true);
@@ -198,7 +192,6 @@ public class UserDaoImp implements UserDao {
                     "user_last_name=?," +
                     "user_email=?," +
                     "user_role_id=?," +
-                    "user_status_id=? " +
                     "where ers_users_id=?";
 	        PreparedStatement ps = c.prepareStatement(sql);
 	        ps.setString(1, user.getUsername());
@@ -214,15 +207,7 @@ public class UserDaoImp implements UserDao {
                     ps.setInt(6, 1);
                     break;
             }
-            switch(user.getActive().toLowerCase()){
-                case "active":
-                    ps.setInt(7, 0);
-                    break;
-                case "inactive":
-                    ps.setInt(7, 1);
-                    break;
-            }
-            ps.setInt(8, user.getId());
+            ps.setInt(7, user.getId());
 	        ps.executeUpdate();
 	        c.commit();
 	        c.setAutoCommit(true);

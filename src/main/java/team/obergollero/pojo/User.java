@@ -8,7 +8,7 @@ public class User {
 	private String lastName;
 	private String email;
 	private String role;
-	private String active;
+
 	public int getId() {
 		return id;
 	}
@@ -51,17 +51,12 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public String getActive() {
-		return active;
-	}
-	public void setActive(String active) {
-		this.active = active;
-	}
+
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + " active=" + active + "]";
+				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
 	}
 	
 	

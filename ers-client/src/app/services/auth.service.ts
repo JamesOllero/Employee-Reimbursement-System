@@ -6,11 +6,9 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private authUrl = 'http://localhost:8080/app/auth';
+  private authUrl = 'http://localhost:8080/auth';
 
-  constructor(
-    private http: HttpClient
-    ) { }
+  constructor(private http: HttpClient) { }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('authToken') !== null;
@@ -22,8 +20,7 @@ export class AuthService {
   }
 
   authenticate(username: string, password: string, success, fail) {
-    return this.http.post<any>(this.authUrl,
-      JSON.stringify({email: username, password: password}),
+    return this.http.post<any>(this.authUrl, JSON.stringify({email: username, password: password}),
       {
         headers: {
           'Content-Type': 'application/json'
@@ -34,8 +31,8 @@ export class AuthService {
         localStorage.setItem('authToken', JSON.stringify(resp));
         success();
       },
-      (err) => {
+        (err) => {
         fail(err);
-      });
+      })
   }
 }

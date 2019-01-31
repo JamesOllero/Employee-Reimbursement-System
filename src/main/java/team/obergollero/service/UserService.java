@@ -13,11 +13,7 @@ public class UserService {
         User fromDB = this.userDao.getUserByEmail(u.getEmail());
         if(fromDB!=null) {
             if(fromDB.getPassword().equals(u.getPassword())) {
-                if(fromDB.getActive().toLowerCase().equals("active")){
-                    fromDB.setPassword("");
-                } else {
-                    fromDB = null;
-                }
+                  fromDB.setPassword("");
             } else {
                 fromDB = null;
             }

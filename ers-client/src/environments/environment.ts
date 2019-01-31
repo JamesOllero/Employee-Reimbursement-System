@@ -7,21 +7,24 @@ export const environment = {
   apiUrl: "http://localhost:3000",
   managerNav: [
     {
-      title: 'Reimbursements'
+      title: 'Reimbursemnts'
     },
     {
-      title: 'Ticket Status'
+      title: 'Employees'
     },
     {
-      title: 'New Reimbursement'
+      title: 'New Employee'
     }
   ],
   employeeNav: [
     {
-      title: 'Ticket Status'
+      title: 'Reimbursements'
     },
     {
       title: 'New Reimbursement'
+    },
+    {
+      title: 'Profile'
     }
   ]
 };
