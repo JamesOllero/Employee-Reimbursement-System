@@ -1,3 +1,24 @@
-<p>
-  employee-details works!
-</p>
+<div class="profile">
+  <h2>{{employee.firstName | uppercase}} {{employee.lastName | uppercase}} Details</h2>
+  <div><span>id: </span>{{employee.id}}</div>
+  <div><span>username: </span>{{employee.username}}</div>
+  <div><span>First Name: </span>{{employee.firstName}}</div>
+  <div><span>Last Name: </span>{{employee.lastName}}</div>
+  <div><span>email: </span>{{employee.email}}</div>
+  <div><span>role: </span>{{employee.role}}</div>
+</div>
+<br>
+<div *ngIf="checkedEmployeeIsManager()">
+  <span>Employee Reimbursements</span>
+  <table>
+    <tr>
+      <th>Id</th><th>Description</th><th>Amount</th><th>Status</th>
+    </tr>
+    <tr *ngFor="let reimbursement of employeeReimbursements">
+      <td>{{reimbursement.id}}</td><td>{{reimbursement.description}}</td><td>{{reimbursement.amount}}</td><td>{{reimbursement.status}}</td>
+    </tr>
+  </table>
+</div>
+<br>
+<br>
+<button (click)="goBack()">Go Back</button>

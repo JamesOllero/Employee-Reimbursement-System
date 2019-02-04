@@ -1,5 +1,8 @@
 <nav>
   <ul>
-    <li *ngFor="let item of navItems">{{item.title}}</li>
+    <li *ngFor="let item of navItems">
+      <a [routerLink]=[item.link] class="nav-link">{{item.title}}</a>
+    </li>
+    <button type="submit" (click)="logout()">Logout</button>
   </ul>
 </nav>

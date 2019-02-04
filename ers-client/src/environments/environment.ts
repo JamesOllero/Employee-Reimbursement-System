@@ -7,24 +7,38 @@ export const environment = {
   apiUrl: "http://localhost:3000",
   managerNav: [
     {
-      title: 'Reimbursements'
+      title: 'Reimbursements',
+      link: 'manager/reimbursements'
     },
     {
-      title: 'Employees'
+      title: 'Employees',
+      link: 'manager/employees'
     },
     {
-      title: 'New Employee'
+      title: 'New Employee',
+      link: 'manager/create-employee'
+    },
+    {
+      title: 'New Reimbursement',
+      link: 'employee/create-reimbursement'
+    },
+    {
+      title: 'Profile',
+      link: 'employee/profile'
     }
   ],
   employeeNav: [
     {
-      title: 'Reimbursements'
+      title: 'Reimbursements',
+      link: 'employee/reimbursements'
     },
     {
-      title: 'New Reimbursement'
+      title: 'New Reimbursement',
+      link: 'employee/create-reimbursement'
     },
     {
-      title: 'Profile'
+      title: 'Profile',
+      link: 'employee/profile'
     }
   ]
 };

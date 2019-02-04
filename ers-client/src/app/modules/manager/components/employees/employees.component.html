@@ -1,3 +1,13 @@
-<p>
-  employees works!
-</p>
+<div>
+  <table>
+    <tr>
+      <th>Id</th><th>Name</th><th>Email</th><th>To Details</th>
+    </tr>
+    <tr *ngFor="let employee of employees">
+      <td>{{employee.id}}</td>
+      <td>{{employee.firstName}} {{employee.lastName}}</td>
+      <td>{{employee.email}}</td>
+      <td><button (click)="loadDetails(employee.id)">To Details</button></td>
+    </tr>
+  </table>
+</div>

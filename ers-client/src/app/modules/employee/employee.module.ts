@@ -6,6 +6,9 @@ import { EmployeeProfileComponent } from './components/employee-profile/employee
   declarations: [EmployeeProfileComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    EmployeeProfileComponent
   ]
 })
 export class EmployeeModule { }

@@ -1,3 +1,24 @@
-<p>
-  new-reimbursement works!
-</p>
+<div>
+  <h3>New Reimbursement</h3>
+  <form (ngSubmit)="onSubmit()" #reimbursementForm="ngForm">
+    <div class="form-group">
+      <span><label for="description">Description: </label></span>
+      <input type="text" id="description" required [(ngModel)]="newReimbursement.description" name="description">
+    </div>
+    <div>
+      <span><label for="amount">Amount: </label></span>
+      <input type="number" id="amount" required [(ngModel)]="newReimbursement.amount" name="amount">
+    </div>
+    <div>
+      <span><label for="type">Type: </label></span>
+      <select id="type" [(ngModel)]="newReimbursement.type" name="type">
+        <option value="Travel">Travel</option>
+        <option value="Lodging">Lodging</option>
+        <option value="Food">Food</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="!reimbursementForm.form.valid">Submit</button>
+    <button type="reset">Reset Form</button>
+  </form>
+</div>

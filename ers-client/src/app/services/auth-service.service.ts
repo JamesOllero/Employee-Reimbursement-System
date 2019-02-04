@@ -7,7 +7,8 @@ import { HttpClient} from "@angular/common/http";
 export class AuthServiceService {
   private authUrl = 'http://localhost:8080/login/auth';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('authToken') !== null;
@@ -28,11 +29,12 @@ export class AuthServiceService {
       })
       .toPromise()
       .then((resp) => {
-        localStorage.setItem('authToken', JSON.stringify(resp));
-        success();
+          localStorage.setItem('authToken', JSON.stringify(resp));
+          success();
         },
         (err) => {
-        fail(err);
-      });
+          fail(err);
+        });
   }
 }
+

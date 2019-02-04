@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ReimbursementServlet extends HttpServlet {
@@ -29,23 +30,51 @@ public class ReimbursementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(req.getParameter("userId")!=null) {
+          if (req.getParameter("recent") != null) {
             try {
-                int userId = Integer.parseInt(req.getParameter("userId"));
-                String userReimbursements = getReimbursementsByUser(userId);
-                resp.setStatus(200);
-                resp.setHeader("Content-Type", "application/json");
-                resp.getWriter().write(userReimbursements);
-                return;
-            } catch(NumberFormatException e) {
-                e.printStackTrace();
-                resp.sendError(400, "User Id must be a parseable integer");
-                return;
+              int userId = Integer.parseInt(req.getParameter("userId"));
+              String recentReimbursements = getRecentReimbursements(userId);
+              resp.setStatus(200);
+              resp.setHeader("Content-Type", "application/json");
+              resp.getWriter().write(recentReimbursements);
+              return;
+            } catch (NumberFormatException e) {
+              e.printStackTrace();
+              resp.sendError(400, "Issue in the request");
             }
-        } else {
-            String allReimbursements = getAllReimbursements();
+          } else {
+            try {
+              int userId = Integer.parseInt(req.getParameter("userId"));
+              String userReimbursements = getReimbursementsByUser(userId);
+              resp.setStatus(200);
+              resp.setHeader("Content-Type", "application/json");
+              resp.getWriter().write(userReimbursements);
+              return;
+            } catch (NumberFormatException e) {
+              e.printStackTrace();
+              resp.sendError(400, "User Id must be a parseable integer");
+              return;
+            }
+
+          }
+        }else if(req.getParameter("reimbursementId")!=null) {
+          try{
+            int reimbursementId = Integer.parseInt(req.getParameter("reimbursementId"));
+            String detailedReimbursement = getDetailedReimbursement(reimbursementId);
             resp.setStatus(200);
-            resp.setHeader("Content-Type", "application/json");
-            resp.getWriter().write(allReimbursements);
+            resp.setHeader("Content-Type", "application.json");
+            resp.getWriter().write(detailedReimbursement);
+            return;
+          } catch (NumberFormatException e) {
+            e.printStackTrace();
+            resp.sendError(400, "Reimbursement Id must be a parseable integer");
+          }
+        }
+        else {
+          String allReimbursements = getAllReimbursements();
+          resp.setStatus(200);
+          resp.setHeader("Content-Type", "application/json");
+          resp.getWriter().write(allReimbursements);
         }
     }
 
@@ -69,6 +98,15 @@ public class ReimbursementServlet extends HttpServlet {
         return null;
     }
 
+    private String getRecentReimbursements(int userId) {
+        List<Reimbursement> reimbursements = this.reimbursementService.getFiveReimbursements(userId);
+        try {
+          return new ObjectMapper().writeValueAsString(reimbursements);
+        } catch (JsonProcessingException e) {
+          e.printStackTrace();
+        }
+        return null;
+    }
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         InputStream in = req.getInputStream();
         Reimbursement reimbursement = new ObjectMapper().readValue(in,Reimbursement.class);
@@ -81,9 +119,9 @@ public class ReimbursementServlet extends HttpServlet {
             resp.setStatus(200);
             resp.setHeader("Location", "http://localhost:8080/tickets/tickets?id=" + reimbursement.getId());
         } else {
-            updateReimbursement(reimbursement);
-            resp.setStatus(200);
-            resp.setHeader("Location", "http://localhost:8080/tickets/tickets?id=" + reimbursement.getId());
+          updateReimbursement(reimbursement);
+          resp.setStatus(200);
+          resp.setHeader("Location", "http://localhost:8080/tickets/tickets?id=" + reimbursement.getId());
         }
     }
 
@@ -95,4 +133,14 @@ public class ReimbursementServlet extends HttpServlet {
     private void updateReimbursement(Reimbursement r) {
         reimbursementService.updateReimbursement(r);
     }
+
+    private String getDetailedReimbursement(int reimbursementId) {
+      Reimbursement reimbursement = reimbursementService.getReimbursement(reimbursementId);
+      try {
+        return new ObjectMapper().writeValueAsString(reimbursement);
+      } catch(JsonProcessingException e) {
+        e.printStackTrace();
+      }
+      return null;
+      }
 }

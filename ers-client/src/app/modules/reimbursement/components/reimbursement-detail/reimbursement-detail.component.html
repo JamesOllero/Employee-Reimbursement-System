@@ -1,3 +1,40 @@
-<p>
-  reimbursement-detail works!
-</p>
+<div *ngIf="!editing">
+<table>
+  <tr>
+    <th>Id</th><th>Author</th><th>Description</th><th>Amount</th><th>Status</th><th>Type</th><th>Resolver</th>
+  </tr>
+  <tr>
+    <td>{{reimbursement.id}}</td>
+    <td>{{reimbursement.authorName}}</td>
+    <td>{{reimbursement.description}}</td>
+    <td>{{reimbursement.amount}}</td>
+    <td>{{reimbursement.status}}</td>
+    <td>{{reimbursement.type}}</td>
+    <td>{{reimbursement.resolverName}}</td>
+  </tr>
+</table>
+<button *ngIf="isManager()" (click)="startEdit()">Update Reimbursement</button>
+<br>
+</div>
+<div *ngIf="editing">
+  <form (ngSubmit)="onSubmit()" #approvalForm="ngForm">
+    <div class="form-group">
+      <label>{{reimbursement.id}}</label><br>
+      <label>{{reimbursement.authorName}}</label><br>
+      <label>{{reimbursement.description}}</label><br>
+      <label>${{reimbursement.amount}}</label><br>
+      <label>{{reimbursement.type}}</label>
+    </div>
+    <div>
+      <label for="newStatus">New Status:</label>
+      <select id="newStatus" [(ngModel)]="reimbursement.status" name="status">
+        <option value="approved">Approved</option>
+        <option value="denied">Denied</option>
+      </select>
+    </div>
+    <button type="submit" [disabled]="isActiveUser()">Submit</button>
+  </form>
+</div>
+<br>
+<button (click)="goBack()">Return</button>
+

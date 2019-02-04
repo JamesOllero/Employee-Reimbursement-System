@@ -45,7 +45,8 @@ commit;
 insert into project_1.ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) values ('jdollero', 'password1', 'James', 'Ollero', 'james.d.ollero@outlook.com', 0), ('csoberg', 'password1', 'Christopher', 'Oberg', 'oberg.chris@yahoo.com', 0), ('aduet', 'password1', 'August', 'Duet', 'aduet@revature.com', 1), ('dfay', 'password1', 'David', 'Fay', 'dfay@revature.com', 1);
 commit;
 
-insert into project_1.ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) values (110.00, date '2018-12-22', null, 'IQ Apartment Rent', 1, null, 0, 0), (250.00, date '2019-01-05', date '2019-01-06', null, 2, 3, 2, 3), (22.00, date '2019-01-05', date '2019-01-06', 'Company Lunch', 1, 4, 1, 2);
+insert into project_1.ers_reimbursement (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) values 
+(110.00, date '2018-12-22', null, 'IQ Apartment Rent', 1, null, 0, 0), (250.00, date '2019-01-05', date '2019-01-06', null, 2, 3, 2, 3), (22.00, date '2019-01-05', date '2019-01-06', 'Company Lunch', 1, 4, 1, 2);
 commit;
 
 drop table project_1.ers_reimbursement;

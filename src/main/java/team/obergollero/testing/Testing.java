@@ -9,6 +9,8 @@ import team.obergollero.pojo.Reimbursement;
 import team.obergollero.pojo.User;
 import team.obergollero.data.ReimbursementDao;
 import team.obergollero.data.ReimbursementDaoImp;
+import team.obergollero.util.EncryptionUtil;
+
 import java.util.List;
 
 public class Testing {
@@ -32,5 +34,12 @@ public class Testing {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+
+		testEncryption("password1");
+		testEncryption("another1");
 	}
+
+	public static void testEncryption(String input) {
+    System.out.println(EncryptionUtil.finalScore(input));
+  }
 }
