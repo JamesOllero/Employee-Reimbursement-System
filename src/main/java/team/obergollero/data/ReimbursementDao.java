@@ -14,4 +14,5 @@ public interface ReimbursementDao {
 	void updateReimbursement(Reimbursement reimbursement);
 	int getLatestId();
 	List<Reimbursement> getFiveReimbursements(int userId);
+	Reimbursement getSingleReimbursement(int reimbursementId);
 }

@@ -7,6 +7,9 @@ import { AppRouterModule } from './app-router.module';
 import { FormsModule } from "@angular/forms";
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { EmployeeModule} from "./modules/employee/employee.module";
+import {ReimbursementModule} from "./modules/reimbursement/reimbursement.module";
+import {ManagerModule} from "./modules/manager/manager.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { NavigationComponent } from './navigation/navigation.component';
     BrowserModule,
     AppRouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    EmployeeModule,
+    ReimbursementModule,
+    ManagerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

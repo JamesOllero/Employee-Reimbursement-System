@@ -1,3 +1,18 @@
-<p>
-  rebursements works!
-</p>
+<div>
+  <table>
+    <tr>
+      <th>Id</th><th>Author</th><th>Description</th><th>Amount</th><th>Status</th><th>Type</th><th>Resolver</th><th>To Details</th>
+    </tr>
+    <tr *ngFor="let reimbursement of reimbursementsPile">
+      <td>{{reimbursement.id}}</td>
+      <td>{{reimbursement.authorName}}</td>
+      <td>{{reimbursement.description}}</td>
+      <td>${{reimbursement.amount}}</td>
+      <td>{{reimbursement.status}}</td>
+      <td>{{reimbursement.type}}</td>
+      <td>{{reimbursement.resolverName}}</td>
+      <td><button (click)="loadDetails(reimbursement.id)">To Details</button></td>
+    </tr>
+  </table>
+</div>
+

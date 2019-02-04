@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +48,36 @@ public class UserServlet extends HttpServlet {
                 resp.sendError(400, "User Id must be a parseable integer");
                 return;
             }
+        } else if(req.getParameter("employeeId")!=null) {
+          try {
+            int userId = Integer.parseInt(req.getParameter("employeeId"));
+            String employeeDetails = getEmployeeDetails(userId);
+            resp.setStatus(200);
+            resp.setHeader("Content-Type", "application/json");
+            resp.getWriter().write(employeeDetails);
+            return;
+          } catch (NumberFormatException e) {
+            e.printStackTrace();
+            resp.sendError(400, "User Id must be a parseable integer");
+            return;
+          }
         } else {
-            resp.sendError(400, "No user information sent");
+            String allEmployees = getAllEmployees();
+            resp.setStatus(200);
+            resp.setHeader("Content-Type", "application/json");
+            resp.getWriter().write(allEmployees);
         }
     }
 
-//    private String getUserById(int userId) {
-//        User user = userService.getUserById
-//    }
+    private String getAllEmployees() {
+      List<User> users = userService.getAllUsers();
+      try {
+        return new ObjectMapper().writeValueAsString(users);
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+      }
+      return null;
+    }
 
     private String getFiveReimbursements(int userId) {
         List<Reimbursement> reimbursements = reimbursementService.getFiveReimbursements(userId);
@@ -64,5 +87,34 @@ public class UserServlet extends HttpServlet {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String getEmployeeDetails(int userId) {
+      User user = userService.getUserById(userId);
+      try {
+        return new ObjectMapper().writeValueAsString(user);
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+      }
+      return null;
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+      InputStream in = req.getInputStream();
+      User user = new ObjectMapper().readValue(in, User.class);
+      if(user == null) {
+        resp.sendError(400, "Message body unreadable");
+        return;
+      }
+      if(user.getId()==0) {
+        addUser(user);
+        resp.setStatus(200);
+        resp.setHeader("Location", "http://localhost:8080/user/users?id=" + user.getId());
+      }
+    }
+
+    public void addUser(User u) {
+      userService.addNewUser(u);
+      u.setId(userService.getLatestId());
     }
 }

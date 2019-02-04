@@ -34,4 +34,8 @@ public class ReimbursementService {
     }
 
     public List<Reimbursement> getFiveReimbursements(int userId) {return this.reimbursementDao.getFiveReimbursements(userId);}
+
+    public Reimbursement getReimbursement(int reimbursementId) {
+      return this.reimbursementDao.getSingleReimbursement(reimbursementId);
+    }
 }

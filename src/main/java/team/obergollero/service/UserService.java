@@ -4,6 +4,8 @@ import team.obergollero.data.UserDao;
 import team.obergollero.data.UserDaoImp;
 import team.obergollero.pojo.User;
 
+import java.util.List;
+
 public class UserService {
     private UserDao userDao;
     public UserService() {
@@ -12,6 +14,7 @@ public class UserService {
     public User authenticate(User u) {
         User fromDB = this.userDao.getUserByEmail(u.getEmail());
         if(fromDB!=null) {
+            u.setPassword(this.userDao.encrypt(u.getPassword()));
             if(fromDB.getPassword().equals(u.getPassword())) {
                   fromDB.setPassword("");
             } else {
@@ -33,4 +36,16 @@ public class UserService {
         User user = userDao.getUserByEmail(email);
         return user;
     }
+
+    public User getUserById(int userId) {
+        return this.userDao.getUserById(userId);
+    }
+
+    public List<User> getAllUsers() {
+        return this.userDao.getAllUsers();
+    }
+
+    public int getLatestId() {return this.userDao.getLatestId();}
+
+    public void addNewUser(User u) {this.userDao.createNewUser(u);}
 }
